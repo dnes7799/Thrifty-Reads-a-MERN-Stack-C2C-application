@@ -1,0 +1,8 @@
+.nav a{
+    text-decoration: none !important;
+    color: black !important;
+}
+
+.nav a:hover{
+  color: rgb(217, 48, 105) !important;
+}
