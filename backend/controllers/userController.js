@@ -1,6 +1,6 @@
 //import model from userModel.js
 const User = require('../models/userModel')
-
+const mongoose = require('mongoose')
 //import .env file
 require("dotenv").config();
 
@@ -13,11 +13,48 @@ const validator = require('validator')
 //import hashing library to hash the password
 const bcrypt = require('bcryptjs')
 
+
+//get user info - profile page
+
+const userInfo = async (req, res) => {
+
+
+    const user = await User.findById(req.user._id);
+
+    if (user) {
+        res.status(200).json(user)
+    }
+    else {
+        res.status(404).json("There is no such user")
+    }
+
+}
+
+//get user info from user id
+
+const getUser = async (req, res) => {
+    const {id} = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json("This user is not currently available. Please come later.")
+    }
+    const user = await User.findById(id)
+    if (!user) {
+        return res.status(404).json("This user is not currently avaible.")
+    }
+    else{
+    res.status(200).json(user)}
+}
+
+
 //sign up user
 const registerUser = async (req, res, next) => {
 
     try {
-        const { first_name, last_name, email, password } = req.body
+        const { first_name, last_name, email, password, interests } = req.body
+
+        const imageName = req.file.path.split("\\").slice(-1)
+
+
 
         if (!first_name || !last_name || !email || !password) {
             throw Error("All inputs must be filled")
@@ -43,7 +80,10 @@ const registerUser = async (req, res, next) => {
             first_name,
             last_name,
             email: email.toLowerCase(),
-            password: encryptedUserPassword
+            password: encryptedUserPassword,
+            image: imageName[0],
+            interests
+
         }).then(user => {
             const maxAge = 2 * 60 * 60;
             const token = jwt.sign(
@@ -61,7 +101,10 @@ const registerUser = async (req, res, next) => {
             res.status(201).json({
                 message: "User successfully created",
                 email,
-                token
+                token,
+                id: user._id,
+                role: user.role,
+                interests
             })
         })
     } catch (error) {
@@ -91,44 +134,53 @@ const loginUser = async (req, res) => {
         const user = await User.findOne({ email });
 
         if (!user) {
-            res.status(400).json({ error: "There is no user with that email address. ramro sanga email haan saale gadha!!!." })
+            res.status(400).json({ error: "There is no user with that email address." })
         }
-        await bcrypt.compare(password, user.password).then((result) => {
-            if (result) {
-                const maxAge = 2 * 60 * 60;
-                const token = jwt.sign(
-                    { id: user._id, email, role: user.role },
-                    process.env.jwtSecret,
-                    {
-                        expiresIn: maxAge
-                    }
-                )
-                res.cookie("jwt", token, {
-                    httpOnly: true,
-                    maxAge: maxAge * 1000
-                })
+        if (user) {
+            await bcrypt.compare(password, user.password).then((result) => {
+                if (result) {
+                    const maxAge = 2 * 60 * 60;
+                    const token = jwt.sign(
+                        { id: user._id, email, role: user.role },
+                        process.env.jwtSecret,
+                        {
+                            expiresIn: maxAge
+                        }
+                    )
+                    res.cookie("jwt", token, {
+                        httpOnly: true,
+                        maxAge: maxAge * 1000
+                    })
 
-                res.status(200).json({
-                    message: "Login successful",
-                    email,
-                    token
-                })
+                    res.status(200).json({
+                        message: "Login successful",
+                        email,
+                        token,
+                        id: user._id,
+                        role: user.role,
+                        interests: user.interests,
+                        name: user.first_name + user.last_name
+                    })
 
-            }
-            else {
-                res.status(400).json({ message: "Password is not correct" })
-            }
+                }
+                else {
+                    res.status(400).json({ error: "Password is not correct" })
+                }
 
-        })
+            })
+        }
 
     } catch (error) {
         res.status(400).json({
             message: "An error occurred",
-            error: error.message
+            error: error.message,
         })
     }
 
 }
+
+
+
 
 //update user
 const updateUser = async (req, res) => {
@@ -189,5 +241,7 @@ module.exports = {
     registerUser,
     loginUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    userInfo,
+    getUser
 }

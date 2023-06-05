@@ -40,14 +40,11 @@ export const AuthContextProvider = ({ children }) => {
             else {
                 dispatch({ type: 'LOGIN', payload: user })
             }
-
-
         }
-        
-        //debugger://VM641 installHook.js 1861
 
     }, [])
     console.log('AuthContext State:', state)
+
 
 
     return (

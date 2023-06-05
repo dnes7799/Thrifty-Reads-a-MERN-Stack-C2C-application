@@ -25,6 +25,14 @@ const userSchema = new Schema({
         type: String,
         required: true,
         default: "Basic"
+    },
+    image: {
+        type: String,
+        required: true
+    },
+    interests: {
+        type: [String],
+        required: true
     }
 
 })

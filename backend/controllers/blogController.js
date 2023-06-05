@@ -1,37 +1,6 @@
 //models
 const mongoose = require('mongoose')
 const Blog = require('../models/blogModel')
-const multer = require('multer')
-const path = require('path')
-
-//setup storage engine for multer
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, '..', 'public')); //specify folder to save uploaded images
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-})
-
-const fileFilter = (req, file, cb) => {
-    const allowedFileTypes = /jpeg|jpg|png/;
-    const extname = allowedFileTypes.test(path.extname(file.originalname).toLowerCase())
-    const mimetype = allowedFileTypes.test(file.mimetype)
-
-    if (extname && mimetype) {
-        return cb(null, true)
-    } else {
-        cb(new Error('Error: Only jpeg, jpg and png images are supported.'))
-    }
-
-}
-
-//initialize upload
-const upload = multer({
-    storage: storage,
-    fileFilter: fileFilter
-})
 
 //get all blogs
 const getBlogs = async (req, res) => {
@@ -55,24 +24,17 @@ const getBlog = async (req, res) => {
 //post a blog
 const addBlog = async (req, res) => {
 
-    console.log(req.file)
     const { title, author, text } = req.body
-    //const image = req.file
-    const imageName = Date.now() + path.extname(req.file.originalname)
-    try {
-        upload.single('image')
-        try {
-            const blog = await Blog.create({ title, author, text, image: imageName }) //save the image file to the database
-            res.status(200).json(blog)
 
-        } catch (error) {
-            res.status(400).json({ error: error.message })
-        }
-    }
-    catch (error) {
+    const imageName = req.file.path.split("\\").slice(-1)
+
+    try {
+        const blog = await Blog.create({ title, author, text, image: imageName[0] }) //save the image file to the database
+        res.status(200).json(blog)
+
+    } catch (error) {
         res.status(400).json({ error: error.message })
     }
-
 
 }
 

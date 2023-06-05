@@ -25,12 +25,10 @@ const AddBlog = () => {
         formData.append('author', author);
         formData.append('text', text);
         formData.append('image', image);
-        console.log(title, author, text, image)
 
         const response = await fetch('/blogs', {
             method: 'POST',
-            body: formData,
-            
+            body: formData
            
         })
         const json = await response.json()
@@ -42,7 +40,7 @@ const AddBlog = () => {
             setTitle('')
             setAuthor('')
             setText('')
-            setImage(null)
+            setImage('')
             setError(null)
             navigate('/blogs')
         }

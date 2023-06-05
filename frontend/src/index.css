@@ -1,6 +1,69 @@
-
-.add-book-form{
+.add-book-form {
   width: auto;
 }
 
 
+.customer img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 0.5em;
+}
+.messages-section{
+  width:100%;
+  padding: 0.5em;
+  margin: 0.1em 1em;
+}
+
+.messages-section span{
+  font-size: larger;
+  font-weight: 500;
+  font-style: italic;
+
+}
+.message p{
+  margin: 0;
+  padding: 0;
+}
+
+.books-list img{
+  width: 200;
+  height: 300px;
+}
+
+.book-details img{
+  width: 350px;
+  height: 600px;
+}
+
+.wishlist-page{
+  margin: auto;
+  padding: 1em;
+}
+.wishlist-item{
+  float: left;
+  font-weight: 500;
+  margin: 0.5em;
+}
+.wishlist-item img{
+  width: 150px;
+  height: 200px;
+
+}
+
+.modal-message{
+  width: 100%;
+}
+.own-message{
+  color: white;
+  background-color: blue;
+}
+
+.others-message{
+  color: white;
+  background-color: gray;
+}
+
+.search-bar{
+  width: 100%;
+}

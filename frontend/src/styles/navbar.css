@@ -1,8 +1,216 @@
-.nav a{
-    text-decoration: none !important;
-    color: black !important;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
 }
 
-.nav a:hover{
-  color: rgb(217, 48, 105) !important;
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    min-height: 100vh;
+
+}
+
+@media (min-width:300px) {
+
+    .upper-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .logo {
+        display: flex;
+    }
+
+    .logo img {
+        width: 40px;
+    }
+
+    .logo p {
+        font-weight: 700;
+        font-size: 16px;
+        color: hsl(242, 28%, 21%);
+        text-decoration: none;
+        margin-top: 1.5em;
+
+    }
+
+    .header .login {
+        flex-direction: column;
+        margin-right: 1em;
+        align-items: center;
+    }
+
+    .header .login a {
+        color: #fff;
+        background-color: hsl(202, 52%, 36%);
+        padding: 6px 15px;
+        border-radius: 5px;
+        margin-left: auto;
+        text-decoration: none;
+        text-align: center;
+        display: block;
+        font-weight: 700;
+        font-size: 0.8em;
+    }
+
+    .header .login p {
+        color: hsl(202, 52%, 36%);
+        font-size: 11px;
+        margin-top: 5px;
+    }
+
+    .lower-nav {
+        display: grid;
+        grid-template-columns: auto auto auto;
+    }
+
+    .menu {
+        position: fixed;
+        inset: 0;
+        transition: 0.5s ease;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .menu-content {
+        position: fixed;
+        top: 0;
+        left: -360px;
+        bottom: 0;
+        width: 100%;
+        max-width: 360px;
+        padding: 2rem;
+        transition: 0.5s ease;
+        overflow-y: scroll;
+        background-color: azure;
+    }
+
+    .menu-expanded {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .expanded {
+        transform: translateX(360px);
+
+    }
+
+    .menu-content a {
+        text-decoration: none;
+        color: #000000;
+    }
+
+    .nav {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .lower-nav button {
+        border: none;
+        background: transparent;
+    }
+
+    .loggedin-nav {
+        background: transparent;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        height: 65px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .nav-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 1em;
+        font-size: 1.5em;
+    }
+
+}
+
+@media(min-width:650px) {
+    .upper-nav{
+        margin: 0 2em;
+    }
+
+
+    .logo img{
+        width: 80px;
+    }
+
+    .logo p{
+        font-size: 1em;
+        text-decoration: none;
+    }
+
+    .lower-nav {
+        display: flex;
+        margin: 0 2em;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .hamburger-button, .cross-button {
+        display: none;
+    }
+
+    .no-user {
+        display: none;
+    }
+
+    .menu {
+        opacity: 1;
+        visibility: visible;
+        inset: unset;
+        position: static;
+        align-items: center;
+    }
+
+    .menu-content {
+        position: static;
+        background: transparent;
+        padding: 0.5rem;
+        overflow-y: hidden;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nav {
+        flex-direction: row;
+    }
+
+    .menu-content a {
+        margin-right: 3em;
+    }
+
+    .loggedin-nav{
+        position: inherit;
+    }
+
+    .loggedin-nav a{
+        text-decoration: none;
+        margin-right: 1em;
+        color: #000000;
+    }
+
+    .nav-icon{
+        font-size: 16px;
+    }
+
+    .loggedin-nav .button{
+        cursor: pointer;
+    }
+
+    .loggedin-nav .button:hover{
+        color: #0d6efd;
+    }
+    
+
 }

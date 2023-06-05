@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-
+import '../styles/blogdetails.css'
 
 const BlogDetails = () => {
 
@@ -11,14 +11,15 @@ const BlogDetails = () => {
     return (
         <div >
             {blog &&
-                <div className="blog-details-container m-3">
-                    <div className="blog-image-text d-flex justify-content-around">
+                <div className="blog-details">
+                    <div className="blog-image-text">
                         <div className="image">
-                            image container
+                            <img src={`http://localhost:8000/public/${blog.image}`} alt='blog-pic' />
+
                         </div>
                         <div className="text">
                             <h3>{blog.title}</h3>
-                            <p>{blog.author}</p>
+                            <p>By: {blog.author}</p>
                         </div>
 
                     </div>

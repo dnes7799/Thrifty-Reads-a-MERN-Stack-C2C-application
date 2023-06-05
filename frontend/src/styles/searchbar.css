@@ -1,0 +1,33 @@
+.search-container {
+    width: 500px;
+    background-color:hsl(175, 26%, 91%);
+    border-radius: 25px;
+    padding: 0 20px;
+    margin: 0 1em;
+}
+.search-container form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+} 
+.search-container input[type="text"] {
+    color: hsl(0, 0%, 67%);
+    outline: 0px; 
+    border: none;
+    background-color: transparent;
+    width: 100%;
+}
+
+.search-container .search-icon{
+    background-color: transparent;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    padding: 0.5em;         
+}
+.fa-search {
+    color: hsl(0, 0%, 67%);
+    margin-left: -5px; 
+} 
+
+

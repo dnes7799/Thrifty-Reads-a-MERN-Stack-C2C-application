@@ -1,19 +1,19 @@
 import { useAuthContext } from "./useAuthContext";
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 export const useLogin = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
     const {dispatch} = useAuthContext()
-
+    const navigate = useNavigate()
     const login = async (email, password) => {
         setIsLoading(true)
 
         //reset the error to be null after when the inputs are wrong
         setError(null)
 
-        const response = await fetch('login', {
+        const response = await fetch('/login', {
             method: 'POST',
             body: JSON.stringify({email, password}),
             headers: {'Content-Type': 'application/json' }
@@ -35,6 +35,7 @@ export const useLogin = () => {
             dispatch({type: 'LOGIN', payload: json})
 
             setIsLoading(false)
+            navigate('/')
         }
 
 

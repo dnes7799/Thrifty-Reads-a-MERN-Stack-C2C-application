@@ -1,0 +1,17 @@
+.blogs{
+    margin: 1rem;
+    padding: 1em;
+}
+.blog{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 3em;
+}
+.blog img{
+    width: 500px;
+    height: 350px;
+}
+
+.blog-text{
+    margin: 2em;
+}

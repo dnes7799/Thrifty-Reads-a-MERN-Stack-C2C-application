@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from '../hooks/useAuthContext'
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import { Link } from "react-router-dom";
+import '../styles/mybooks.css'
 
 const MyBooks = () => {
 
-    const [books, setBooks] = useState(null)
+    const [books, setBooks] = useState([])
     const { user } = useAuthContext()
 
     useEffect(() => {
         const fetchBooks = async () => {
+            //
             const response = await fetch('/my-books', {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
@@ -24,26 +28,29 @@ const MyBooks = () => {
                 setBooks(json)
             }
         }
-
         if (user) {
             fetchBooks()
         }
-
-        //since we are adding user in the useEffection, we need to add it as the dependency
-
     }, [user])
+
 
     return (
         <div className="my-books-page">
+            {!books.length > 0 && <h3>You haven't listed any books for sale.</h3>}
             {books && books.map((book) => (
-                <div className="card m-3" key={book._id}>
-                    <div className="card-footer">
-                        <p>{book.title}</p>
-                        <p>by {book.author} </p>
-                        <p> Rs. {book.price.toLocaleString("en-US")}</p>
-                        <p>{book.createdAt}</p>
+                <div className="my-books" key={book._id}>
+                    <Link to={`/books/${book._id}`}
+                        state={{ book }}
+                    >
+                        <div className="book">
+                            <img src={`http://localhost:8000/public/${book.img}`} alt="book" />
+                            <h4>{book.title}</h4>
+                            <p>by {book.author} </p>
+                            <p> Rs. {book.price.toLocaleString("en-US")}</p>
+                            <p>{formatDistanceToNow(new Date(book.createdAt), { addSuffix: true })}</p>
 
-                    </div>
+                        </div>
+                    </Link>
                 </div>
             ))}
 

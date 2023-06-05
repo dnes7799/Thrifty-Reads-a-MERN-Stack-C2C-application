@@ -18,14 +18,11 @@ const requireAuth = async (req, res, next) => {
         const payload = jwt.verify(token, process.env.jwtSecret)
 
         req.user = await User.findOne({_id: payload.id}).select('_id')
-       
 
-        //console.log(req.user)
         //goes to the next function in the router, eg: getBooks
         next()
         
     }catch(error){
-        console.log(error)
         return res.status(401).json({error: "Unauthorized Request"})
     }
 

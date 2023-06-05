@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    min-height: 100vh;
+    /* overflow-y: hidden; */
+}
+
+@media (min-width:300px) {
+    .login-body {
+        margin: 1rem;
+    }
+
+    .login-body img {
+        width: 100%;
+        margin-bottom: 40px;
+        display: none;
+    }
+
+    .login-body .login-text {
+        border-radius: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .login-text h5 {
+        font-weight: 600;
+        font-size: 17px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+
+    .box input {
+        width: 100%;
+        padding: 6px;
+        border: none;
+        outline: none;
+        background-color: hsl(0, 0%, 85%);
+        border-radius: 5px;
+
+    }
+
+    .box button {
+        cursor: pointer;
+        width: 100%;
+        padding: 8px;
+        background-color: hsl(202, 52%, 36%);
+        color: #fff;
+        border: none;
+        text-align: center;
+        display: block;
+        font-weight: 700;
+        margin-top: 20px;
+        border-radius: 5px;
+    }
+
+    .create-account {
+        margin-top: 1em;
+    }
+
+    .create-account label {
+        color: hsl(0, 0%, 40%);
+        font-size: 13px;
+        text-align: center;
+        font-weight: 400;
+    }
+
+    .create-account a {
+        text-decoration: none;
+        margin-left: 1em;
+        font-size: 14px;
+
+    }
+
+  
+}
+
+@media(min-width:768px) {
+    .login-body img{
+        display: inherit;
+        width: 380px;
+
+    }
+    .login-body{
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 50px;
+       width: 100%;
+        margin: 2rem auto;
+    }
+    .login-text{
+        width: 380px;
+        background-color: hsl(0, 0%, 90%);
+    }
+    .box form label{
+        margin-bottom: 0.5em;
+    }
+    .box form input{
+        margin-bottom: 1.5em;
+    }
+
+    .box form button{
+        margin-bottom: 2em;
+    }
+    
+}
+
+
+
+@media(min-width:1440px) {
+    .login-page, .footer-body {
+        width: 80%;
+        margin: 2rem auto;
+    }
+}

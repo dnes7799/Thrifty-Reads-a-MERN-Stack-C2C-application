@@ -1,0 +1,24 @@
+.blog-details{
+    margin: 1em;
+    padding: 1em;
+}
+
+.blog-image-text{
+    display: flex;
+    flex-direction: row;
+}
+
+.image img{
+    width: 400px;
+    height: 300px;
+}
+
+.text{
+    margin: 1em;
+    padding: 2em;
+}
+
+.blog-content{
+    padding: 1em;
+    justify-content: center;
+}

@@ -1,5 +1,192 @@
-
-.signup{
+.signup {
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;
+}
+
+@media (min-width:300px) {
+
+    /* .signin-image img{
+        width: 100%;
+       
+        margin-bottom: 40px;
+        display: none;
+        
+    } */
+
+    /* .signin-body .signin-text{
+       
+        border-radius: 15px;
+        padding: 1.5rem;
+    } */
+    .signin-page h3 {
+        font-weight: 600;
+        font-size: 30px;
+        margin-bottom: 50px;
+        color: hsl(242, 28%, 21%);
+        ;
+        text-align: left;
+    }
+
+    .signin-page form label {
+        color: hsl(0, 0%, 30%);
+        font-size: 16px;
+        text-align: left;
+        font-weight: 500;
+    }
+
+    .signin-page form {
+        width: 100%;
+    }
+
+    .signin-page form input {
+        width: 100%;
+        padding: 6px;
+        border: none;
+        outline: none;
+        background-color: hsl(0, 0%, 100%);
+        border-bottom: .6px solid hsl(0, 4%, 72%);
+        display: block;
+        color: hsl(242, 28%, 21%);
+        ;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+    /* form > div{
+        width: 100%;
+        overflow: hidden;
+        border-radius: 5px;
+    } */
+
+
+
+
+    .signin-page  button {
+        cursor: pointer;
+
+        padding: 8px;
+        background-color: hsl(242, 28%, 21%);
+        ;
+        color: #fff;
+        border: none;
+        text-align: center;
+        display: block;
+        font-weight: 700;
+        margin-top: 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        width: 100%;
+    }
+
+    /*      
+     .icons .face{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        
+       
+     } */
+
+    /* .icons a{
+       
+       width: 100%;
+        padding: 8px;
+        background-color: hsl(0, 0%, 100%);
+        color:  hsl(242, 28%, 21%);
+        border: 1px solid hsla(242, 28%, 21%,.2); */
+    /* text-align: center;  */
+    /* display: block;
+        font-weight: 700;
+        margin-top: 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        
+        
+     } */
+
+    /* .log-in p{
+        color: hsl(0, 0%, 40%);
+        font-size: 13px;
+        text-align: center;
+        font-weight: 400;
+        margin-top: 20px;
+     } */
+    /* .log-in a{
+        text-decoration: none;
+        margin-left: 5px;
+        color: hsl(202, 100%, 67%);
+
+     } */
+}
+
+@media(min-width:768px) {
+
+
+    /* .signin-body img{ 
+        display: inherit;
+        width: 380px;
+    }
+    .signin-body{
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 50px;
+       width: 100%;
+        margin: 2rem auto;
+    }
+    .signin-text{
+        width: 380px;
+        background-color: hsl(0, 0%, 90%);
+    }
+    .footer-signo p{
+        margin-top: 10px;
+    }
+    .social-icons{
+        text-align: right;
+        padding-right: 10px;
+     } */
+    .signin-page {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+@media(min-width:1024px) {
+
+    .signin-page {
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+    }
+
+    /* .signin-image img{
+         display: inherit;
+         width: 100%;
+         object-fit: cover;
+         height: 100%;
+    } */
+    /* .signin-body{
+        display: grid;
+        grid-template-columns: 60% 40%; */
+    /* justify-content: center;
+        align-items: center; */
+    /* } */
+    .signin p {
+        font-size: large;
+        letter-spacing: 2px;
+    }
+
+
+}
+
+@media(min-width:1300px) {
+    .signin-page {
+        width: 95%;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        margin: 5rem;
+    }
+
 }

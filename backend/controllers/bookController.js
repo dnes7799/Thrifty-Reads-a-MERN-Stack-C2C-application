@@ -8,10 +8,29 @@ const Book = require('../models/addBookModel')
 //get all books
 const getBooks = async (req, res) => {
 
-    const books = await Book.find({}).sort({ createdAt: -1 })
-    res.status(200).json(books)
+    try {
+        const searchQuery = req.query.search
 
+        let books;
+        if (searchQuery) {
+            books = await Book.find({
+                $or: [
+                    { title: { $regex: searchQuery, $options: 'i' } },
+                    { author: { $regex: searchQuery, $options: 'i' } },
+                    { category: { $regex: searchQuery, $options: 'i' } }
+                ]
+            }).sort({ createdAt: -1 })
+        } else {
+            books = await Book.find({}).sort({ createdAt: -1 })
+        }
+        res.status(200).json(books)
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
 }
+
+
+
 //get user's books
 const myBook = async (req, res) => {
     const user_id = req.user._id;
@@ -38,13 +57,14 @@ const getBook = async (req, res) => {
 
 //add a new book
 const addBook = async (req, res) => {
-    const { title, author, publishDate, category, price, condition, img } = req.body
+    const { title, author, publishDate, category, price, condition } = req.body
 
+    const imageName = req.file.path.split("\\").slice(-1)
 
     //post documents to the database
     try {
         const userId = req.user._id
-        const book = await Book.create({ title, author, publishDate, category, price, condition, img, user_id: userId })
+        const book = await Book.create({ title, author, publishDate, category, price, condition, img: imageName[0], user_id: userId })
         res.status(200).json(book)
     } catch (error) {
         res.status(400).json({ error: error.message })
@@ -74,13 +94,16 @@ const updateBook = async (req, res) => {
         return res.status(404).json({ error: "This book is not available" })
     }
 
-    const book = await Book.findByIdAndUpdate({ _id: id }, { ...req.body })
+    const oldBookData = await Book.findByIdAndUpdate({ _id: id }, { ...req.body })
+    
 
-    if (!book) {
+    if (!oldBookData) {
         return res.status(404).json({ error: "This book is not available" })
     }
 
-    res.status(200).json(book)
+    const newBookData = await Book.findById({_id: id})
+
+    res.status(200).json(newBookData)
 
 }
 
@@ -90,6 +113,6 @@ module.exports = {
     getBook,
     addBook,
     deleteBook,
-    updateBook, 
+    updateBook,
     myBook
 }
